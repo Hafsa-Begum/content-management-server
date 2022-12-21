@@ -10,8 +10,11 @@ const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+// DB_USER=contents_by_hafsa
+// DB_PASS=CZxcSq4gtSn4eQUm
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cti1mpr.mongodb.net/test`;
+// const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cti1mpr.mongodb.net/test`;
+const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
