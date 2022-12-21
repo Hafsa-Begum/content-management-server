@@ -15,7 +15,7 @@ const uri = process.env.MONGO_URI;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
+  // serverApi: ServerApiVersion.v1,
 });
 
 const run = async () => {
