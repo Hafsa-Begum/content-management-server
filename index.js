@@ -11,17 +11,18 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.json());
 
-const uri = process.env.MONGO_URI;
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.cti1mpr.mongodb.net/test`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  // serverApi: ServerApiVersion.v1,
+  serverApi: ServerApiVersion.v1,
 });
 
 const run = async () => {
   try {
     const db = client.db("content-management-system");
     const contentCollection = db.collection("content");
+    console.log('Mongodb connected',client.serverApi)
 
     app.get("/contents", async (req, res) => {
       const cursor = contentCollection.find({});
@@ -57,6 +58,8 @@ const run = async () => {
       const result = await contentCollection.deleteOne({ _id: ObjectId(id) });
       res.send(result);
     });
+
+    console.log('no error!')
   } finally {
   }
 };
